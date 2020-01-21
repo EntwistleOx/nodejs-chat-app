@@ -22,23 +22,25 @@ app.use(express.static(publicPath))
 //param socket is an object and contains info about new connections
 io.on('connection', (socket) => {
     console.log('New websocket connection!')
-
-    // socket.emit('countUpdated', count)
-    // socket.on('increment', () => {
-    //     count++
-    //     //Emmits only to 1 connection
-    //     //socket.emit('countUpdated', count)
-    //     //Emmits the event to all connections
-    //     io.emit('countUpdated', count)
-    // })
-
     const message = 'Welcome!'
     socket.emit('message', message)
 
+    //broadcast. -> emmits to all connections but this particular socket
+    socket.broadcast.emit('message', 'A new user has joined!')
+
+    //socket. -> emmits only to 1 connection
     socket.on('sendMessage', (message) => {
+        //io. -> emmits the event to all connections
         io.emit('message', message)
     })
+
+    //Disconnect event
+    socket.on('disconnect', () => {
+        io.emit('message', 'A user has left!')
+    })
 })
+
+
 
 //Listening
 server.listen(port, () => {
