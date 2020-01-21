@@ -1,4 +1,6 @@
 const socket = io()
+const form = document.querySelector('form')
+const msgTxt = document.querySelector('input')
 
 // socket.on('countUpdated', (count) => {
 //     console.log('The count has been updated', count)
@@ -10,5 +12,16 @@ const socket = io()
 // })
 
 socket.on('welcomeMessage', (message) => {
+    console.log(message)
+})
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const message = msgTxt.value
+    socket.emit('clientMessage', message)
+})
+
+socket.on('serverMessage', (message) => {
     console.log(message)
 })

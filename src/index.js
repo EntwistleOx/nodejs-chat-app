@@ -35,6 +35,10 @@ io.on('connection', (socket) => {
     const message = 'Welcome!'
     socket.emit('welcomeMessage', message)
 
+    socket.on('clientMessage', (message) => {
+        io.emit('serverMessage', message)
+    })
+
 
 })
 
