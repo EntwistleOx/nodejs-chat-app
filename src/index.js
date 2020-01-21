@@ -33,13 +33,11 @@ io.on('connection', (socket) => {
     // })
 
     const message = 'Welcome!'
-    socket.emit('welcomeMessage', message)
+    socket.emit('message', message)
 
-    socket.on('clientMessage', (message) => {
-        io.emit('serverMessage', message)
+    socket.on('sendMessage', (message) => {
+        io.emit('message', message)
     })
-
-
 })
 
 //Listening
