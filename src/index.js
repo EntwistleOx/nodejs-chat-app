@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
         //Bad Words
         const filter = new Filter()
 
-        if(filter.isProfane(message)) {
+        if (filter.isProfane(message)) {
             return callback('Profanity is not allowed!')
         }
 
@@ -54,8 +54,6 @@ io.on('connection', (socket) => {
         io.emit('message', 'A user has left!')
     })
 })
-
-
 
 //Listening
 server.listen(port, () => {
