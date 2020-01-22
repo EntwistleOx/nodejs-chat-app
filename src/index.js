@@ -2,6 +2,8 @@ const express = require('express')
 const http = require('http')
 const socketio = require('socket.io')
 const path = require('path')
+const Filter = require('bad-words')
+
 const port = process.env.PORT || 3000
 
 //Create APP
@@ -29,13 +31,22 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('message', 'A new user has joined!')
 
     //socket. -> emmits only to 1 connection
-    socket.on('sendMessage', (message) => {
+    socket.on('sendMessage', (message, callback) => {
+        //Bad Words
+        const filter = new Filter()
+
+        if(filter.isProfane(message)) {
+            return callback('Profanity is not allowed!')
+        }
+
         //io. -> emmits the event to all connections
         io.emit('message', message)
+        callback()
     })
 
-    socket.on('sendLocation', (coords) => {
+    socket.on('sendLocation', (coords, callback) => {
         io.emit('message', `https://www.google.com/maps?q=${coords.latitude},${coords.longitude}`)
+        callback()
     })
 
     //Disconnect event

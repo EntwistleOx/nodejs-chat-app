@@ -4,6 +4,7 @@
   "description": "Chat App with NodeJS and Express\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b\u001b[C\u001b[C\u001b[C\u001b\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[CS, Express, WebSockets and Socket.IO",
   "main": "index.js",
   "dependencies": {
+    "bad-words": "^3.0.0",
     "express": "^4.16.4",
     "socket.io": "^2.2.0"
   },
