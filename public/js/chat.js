@@ -9,15 +9,22 @@ const $messages = document.querySelector('#messages')
 
 //Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
+const locationTemplate = document.querySelector('#location-template').innerHTML
 
 socket.on('message', (message) => {
-    console.log(message)
-    
+    // console.log(message)
     const html = Mustache.render(messageTemplate, {
         message
     })
     $messages.insertAdjacentHTML('beforeend', html)
+})
 
+socket.on('locationMessage', (mapsUrl) => {
+    console.log(mapsUrl)
+    const html = Mustache.render(locationTemplate, {
+        mapsUrl
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
 })
 
 $messageForm.addEventListener('submit', (e) => {
