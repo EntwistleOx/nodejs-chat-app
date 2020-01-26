@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sendMessage', (message, callback) => {
-        //Bad Words
+        //Bad Words Filter
         const filter = new Filter()
         if (filter.isProfane(message)) {
             return callback('Profanity is not allowed!')
